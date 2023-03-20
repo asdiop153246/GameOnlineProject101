@@ -15,7 +15,7 @@ public class bombScript : NetworkBehaviour
         {
             ulong networkObjectID = GetComponent<NetworkObject>().NetworkObjectId;
             SpawnBombEffect();
-            //bombSpawner.DestroyServerRpc(networkObjectID);
+            bombSpawner.DestroyServerRpc(networkObjectID);
         }
     }
     private void SpawnBombEffect()
