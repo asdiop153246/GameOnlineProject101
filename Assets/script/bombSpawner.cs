@@ -37,7 +37,7 @@ public class bombSpawner : NetworkBehaviour
     [ServerRpc]
     void SpawnBombServerRpc()
     {
-        Vector3 spawnPos = transform.position + (transform.forward * 1.5f) + (transform.up * 1.2f);
+        Vector3 spawnPos = transform.position + (transform.forward * 2f) + (transform.up * 1.2f);
         Quaternion spawnRot = transform.rotation;
 
         GameObject Bomb = Instantiate(BombPrefab, spawnPos, spawnRot);

@@ -52,6 +52,7 @@ public class ScoreScript : NetworkBehaviour
             if (IsOwnedByServer) { scoreP2.Value++; }
             else { scoreP1.Value++;}
             Debug.Log("Respawn");
+            updateScore();
             GetComponent<PlayerSpawnScript>().Respawn();
         }
     }

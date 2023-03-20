@@ -21,6 +21,7 @@ public class PlayerControllerScript : NetworkBehaviour
     private Vector3 movementDirection;
     void Start()
     {
+        if (!IsOwner) return;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         running = false;
@@ -84,7 +85,8 @@ public class PlayerControllerScript : NetworkBehaviour
         yield return new WaitForSeconds(dashDuration);
         canDash = true;
     }
-        private void FixedUpdate()
+
+    private void FixedUpdate()
     {
         if (!IsOwner) return;
         moveForward();
