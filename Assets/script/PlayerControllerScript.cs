@@ -10,6 +10,9 @@ public class PlayerControllerScript : NetworkBehaviour
     [SerializeField] private LayerMask groundMask;
     public float speed = 5.0f;
     public float rotationSpeed = 10.0f;
+    public float dashForce = 100f;
+    public float dashDuration = 1.5f;
+    public bool canDash = true;
     public Transform orientation;
     private Camera mainCamera;
     private Animator animator;
@@ -22,6 +25,7 @@ public class PlayerControllerScript : NetworkBehaviour
         rb = GetComponent<Rigidbody>();
         running = false;
         mainCamera = Camera.main;
+
     }
 
     void moveForward()
@@ -65,12 +69,27 @@ public class PlayerControllerScript : NetworkBehaviour
         }
 
     }
-
-    private void FixedUpdate()
+    void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        {
+            Vector3 dashDirection = transform.forward; // Change this to the direction you want to dash in
+            rb.AddForce(dashDirection * dashForce);
+            canDash = false;
+            StartCoroutine(DashCooldown());
+        }
+    }
+    private IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(dashDuration);
+        canDash = true;
+    }
+        private void FixedUpdate()
     {
         if (!IsOwner) return;
         moveForward();
         FaceMousePosition();
+        Dash();
     }
 }
 

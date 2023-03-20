@@ -15,7 +15,7 @@ public class bombScript : NetworkBehaviour
         {
             ulong networkObjectID = GetComponent<NetworkObject>().NetworkObjectId;
             SpawnBombEffect();
-            bombSpawner.DestroyServerRpc(networkObjectID);
+            //bombSpawner.DestroyServerRpc(networkObjectID);
         }
     }
     private void SpawnBombEffect()
@@ -33,7 +33,7 @@ public class bombScript : NetworkBehaviour
     //Auto destroy bullet if not hiiting anything
     IEnumerator delaybeforeDestroy()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3.5f);
         ulong networkObjectID = GetComponent<NetworkObject>().NetworkObjectId;
         bombSpawner.DestroyServerRpc(networkObjectID);
     }

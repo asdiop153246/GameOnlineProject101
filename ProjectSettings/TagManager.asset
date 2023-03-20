@@ -7,6 +7,7 @@ TagManager:
   - MainCanvas
   - DeadZone
   - Bullet
+  - LoginManager
   layers:
   - Default
   - TransparentFX

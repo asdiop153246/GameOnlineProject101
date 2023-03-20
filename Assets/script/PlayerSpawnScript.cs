@@ -8,9 +8,13 @@ public class PlayerSpawnScript : NetworkBehaviour
     MainPlayerScript mainPlayer;
     public Behaviour[] scripts;
     private Renderer[] renderers;
+    int spawnedPoint = 4;
+    LoginManagerScript loginManager;
+
     void Start()
     {
         renderers = GetComponentsInChildren<Renderer>();
+        loginManager = GameObject.FindGameObjectWithTag("LoginManager").GetComponent<LoginManagerScript>();
     }
 
     private void SetPlayerState(bool state)
@@ -20,7 +24,10 @@ public class PlayerSpawnScript : NetworkBehaviour
     }
     private Vector3 GetRandPos()
     {
-        Vector3 randPos = new Vector3(Random.Range(-3, 3), 1, Random.Range(-3, 3));
+        Vector3 randPos;
+        int randomNumber = Random.Range(0, 3);       
+        spawnedPoint = randomNumber;
+        randPos = new Vector3(loginManager.SpawnPoints[spawnedPoint].transform.position.x, loginManager.SpawnPoints[spawnedPoint].transform.position.y, loginManager.SpawnPoints[spawnedPoint].transform.position.z);
         return randPos;
     }
 

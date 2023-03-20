@@ -182,6 +182,11 @@ MonoBehaviour:
   - {fileID: 5067401016457428638}
   - {fileID: -2670402775472601356}
   - {fileID: 1781465991561896266}
+  SpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &-791727896598401541
 MonoBehaviour:
   m_ObjectHideFlags: 0

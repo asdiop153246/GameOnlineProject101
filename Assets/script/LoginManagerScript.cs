@@ -186,5 +186,6 @@ public class LoginManagerScript : MonoBehaviour
         spawnedPoint = randomNumber;
         spawnPos = new Vector3(SpawnPoints[spawnedPoint].transform.position.x, SpawnPoints[spawnedPoint].transform.position.y, SpawnPoints[spawnedPoint].transform.position.z);
         response.Position = spawnPos; response.Rotation = spawnRot;
+        
     }
 }

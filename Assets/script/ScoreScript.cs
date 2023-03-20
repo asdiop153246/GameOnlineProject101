@@ -17,6 +17,9 @@ public class ScoreScript : NetworkBehaviour
     public NetworkVariable<int> scoreP2 = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone,
     NetworkVariableWritePermission.Owner);
 
+    public NetworkVariable<int> HealthPoint = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     void Start()
     {
         p1Text = GameObject.Find("P1ScoreText").GetComponent<TMP_Text>();
@@ -43,13 +46,13 @@ public class ScoreScript : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!IsLocalPlayer) return;
+        if (!IsOwner) return;
         if (collision.gameObject.tag == "Bullet")
         {
             if (IsOwnedByServer) { scoreP2.Value++; }
             else { scoreP1.Value++;}
+            Debug.Log("Respawn");
             GetComponent<PlayerSpawnScript>().Respawn();
         }
-
     }
 }
