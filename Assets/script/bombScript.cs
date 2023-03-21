@@ -10,12 +10,15 @@ public class bombScript : NetworkBehaviour
     public GameObject bombEffectPrefab;
     private void OnCollisionEnter(Collision collision)
     {
-        if (!IsOwner) return;
-        if (collision.gameObject.tag == "Player")
-        {
-            ulong networkObjectID = GetComponent<NetworkObject>().NetworkObjectId;
-            SpawnBombEffect();
-            bombSpawner.DestroyServerRpc(networkObjectID);
+        if (!IsOwner)
+        {            
+            if (collision.gameObject.tag == "Player")
+            {
+                ulong networkObjectID = GetComponent<NetworkObject>().NetworkObjectId;
+                SpawnBombEffect();
+                bombSpawner.DestroyServerRpc(networkObjectID);
+            }
+            
         }
     }
     private void SpawnBombEffect()

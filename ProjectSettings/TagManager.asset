@@ -8,6 +8,8 @@ TagManager:
   - DeadZone
   - Bullet
   - LoginManager
+  - P1ScoreTag
+  - P2ScoreTag
   layers:
   - Default
   - TransparentFX

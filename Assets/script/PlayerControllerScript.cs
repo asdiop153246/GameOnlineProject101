@@ -17,14 +17,14 @@ public class PlayerControllerScript : NetworkBehaviour
     private Camera mainCamera;
     private Animator animator;
     private Rigidbody rb;
-    private bool running;
+    private bool IsWalk;
     private Vector3 movementDirection;
     void Start()
     {
         if (!IsOwner) return;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        running = false;
+        IsWalk = false;
         mainCamera = Camera.main;
 
     }
@@ -40,17 +40,23 @@ public class PlayerControllerScript : NetworkBehaviour
             movementDirection.Normalize();
         }
         rb.MovePosition(transform.position + movementDirection * speed * Time.fixedDeltaTime);
-
-        if (!running)
+        if (Mathf.Abs(verticalInput) > 0.01f)
         {
-            running = true;
+            if (verticalInput > 0.01f)
+            {
+                if (!IsWalk)
+                {
 
+                    IsWalk = true;
+                    animator.SetBool("IsWalk", true);
+
+                }
+            }
         }
-
-        else if (running)
+        else if (IsWalk)
         {
-            running = false;
-
+            IsWalk = false;
+            animator.SetBool("IsWalk", false);
         }
     }
 
@@ -72,6 +78,7 @@ public class PlayerControllerScript : NetworkBehaviour
     }
     void Dash()
     {
+        if (!IsOwner) return;
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             Vector3 dashDirection = transform.forward; // Change this to the direction you want to dash in
